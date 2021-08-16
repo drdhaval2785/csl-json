@@ -3,6 +3,10 @@
     e.g. python json_from_babylon.py mw
     Dr. Dhaval Patel
     16 August 2021
+    Prerequisite:
+    1. csl-json repository is sibling of cologne-stardict repository.
+    2. cologne-stardict has newest data in production folder.
+    3. If you are not sure, it is better to run `bash redo.sh 1` in cologne-stardict repository, to ensure that the data is brought to the latest level.
 """
 import sys
 import codecs
