@@ -6,7 +6,6 @@ import sys
 import codecs
 import json
 import os
-from collections import defaultdict
 from collections import OrderedDict
 
 
