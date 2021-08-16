@@ -38,7 +38,7 @@ if __name__ == "__main__":
     output['data'] = OrderedDict()
     output['data']['words'] = hwdict
     output['data']['text'] = textdict
-    fileout = os.path.join('ashtadhyayi.com', dictId + '.babylon')
+    fileout = os.path.join('ashtadhyayi.com', dictId + '.json')
     fout = codecs.open(fileout, 'w', 'utf-8')
     json.dump(output, fout, indent=4, ensure_ascii=False)
     fout.close()
