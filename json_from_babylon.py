@@ -18,7 +18,7 @@ if __name__ == "__main__":
     fin.close()
     output = OrderedDict()
     output['name'] = dictId
-    output['source'] = 'https://raw.githubusercontent.com/indic-dict/stardict-sanskrit/master/sa-head/en-entries/yates/yates.babylon'
+    output['source'] = 'https://raw.githubusercontent.com/sanskrit-lexicon/csl-json/main/ashtadhyayi.com/' + dictId + '.json'
     entries = data.split('\n\n')[:-1]
     print(len(entries))
     counter = 1
@@ -33,7 +33,8 @@ if __name__ == "__main__":
             else:
                 hwdict[hw] = str(counter)
         textdict[str(counter)] = text
-        print(counter)
+        if counter % 1000 == 0:
+            print(counter)
         counter += 1
     output['data'] = OrderedDict()
     output['data']['words'] = hwdict
