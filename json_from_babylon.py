@@ -12,6 +12,7 @@ import sys
 import codecs
 import json
 import os
+import re
 from collections import OrderedDict
 
 
@@ -29,7 +30,7 @@ if __name__ == "__main__":
     output['name'] = dictId
     output['source'] = 'https://raw.githubusercontent.com/sanskrit-lexicon/csl-json/main/ashtadhyayi.com/' + dictId + '.json'
     # Ignore the last one, as it will be an empty item.
-    entries = data.split('\n\n')[:-1]
+    entries = data.split('\n\n')[1:-1]
     # Total entries in the dictionary.
     print(len(entries))
     counter = 1
@@ -40,6 +41,7 @@ if __name__ == "__main__":
     for entry in entries:
         # Separate headword line and text line
         [hwline, text] = entry.split('\n')
+        text = re.sub('([^ \-])<BR>', '\g<1> <BR>', text)
         # Separate alternate headwords
         hws = hwline.split('|')
         # Attach the headword to ids.
