@@ -44,12 +44,14 @@ if __name__ == "__main__":
         t1 = re.sub('([^ \-])<BR>', '\g<1> <BR>', t1)
         t1split = t1.split('<BR>')
         text = ''.join(t1split[:-2])
-        # <a href=\"https://www.sanskrit-lexicon.uni-koeln.de/scans/csl-apidev/servepdf.php?dict=AP90&page=1196-b\" target=\"_blank\">Scan page : 1196-b</a>
-        m = re.search('servepdf.php\?dict=(.+)&page=([^\"]+)"', t1split[-2])
-        pc = m.group(2)
-        # <a href=\"https://github.com/sanskrit-lexicon/csl-ldev/blob/main/v02/ap90/32175.txt\" target=\"_blank\">Correction submission : hemakUwa, 32175</a>
-        n= re.search('blob/main/v02/([^/]+)/([^.]+)[.]txt"', t1split[-1])
+        # https://yaahi.github.io/?cp=0001-a&d=MW72
+        m = re.search('cp=([^&]+)&', t1split[-2])
+        pc = m.group(1)
+        print(pc)
+        # https://yaahi.github.io/?d=mw&e=2
+        n= re.search('&e=(.*)$', t1split[-1])
         lnum = n.group(2)
+        print(lnum)
         # Separate alternate headwords
         hws = hwline.split('|')
         # Attach the headword to ids.
