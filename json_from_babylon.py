@@ -47,11 +47,9 @@ if __name__ == "__main__":
         # https://yaahi.github.io/?cp=0001-a&d=MW72
         m = re.search('cp=([^&]+)&', t1split[-2])
         pc = m.group(1)
-        print(pc)
         # https://yaahi.github.io/?d=mw&e=2
-        n= re.search('&e=(.*)$', t1split[-1])
-        lnum = n.group(2)
-        print(lnum)
+        n= re.search('&e=([^"]*)"', t1split[-1])
+        lnum = n.group(1)
         # Separate alternate headwords
         hws = hwline.split('|')
         # Attach the headword to ids.
