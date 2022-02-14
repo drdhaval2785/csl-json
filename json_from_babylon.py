@@ -40,8 +40,16 @@ if __name__ == "__main__":
     # For each entry,
     for entry in entries:
         # Separate headword line and text line
-        [hwline, text] = entry.split('\n')
-        text = re.sub('([^ \-])<BR>', '\g<1> <BR>', text)
+        [hwline, t1] = entry.split('\n')
+        t1 = re.sub('([^ \-])<BR>', '\g<1> <BR>', t1)
+        t1split = t1.split('<BR>')
+        text = ''.join(t1split[:-2])
+        # <a href=\"https://www.sanskrit-lexicon.uni-koeln.de/scans/csl-apidev/servepdf.php?dict=AP90&page=1196-b\" target=\"_blank\">Scan page : 1196-b</a>
+        m = re.search('servepdf.php\?dict=(.+)&page=([^\"]+)"', t1split[-2])
+        pc = m.group(2)
+        # <a href=\"https://github.com/sanskrit-lexicon/csl-ldev/blob/main/v02/ap90/32175.txt\" target=\"_blank\">Correction submission : hemakUwa, 32175</a>
+        n= re.search('blob/main/v02/([^/]+)/([^.]+)[.]txt"', t1split[-1])
+        lnum = n.group(2)
         # Separate alternate headwords
         hws = hwline.split('|')
         # Attach the headword to ids.
@@ -53,7 +61,7 @@ if __name__ == "__main__":
             else:
                 hwdict[hw] = str(counter)
         # Attach the text to id.
-        textdict[str(counter)] = text
+        textdict[str(counter)] = [text, pc, lnum]
         # Print at 1000 entry interval for tracking progress.
         if counter % 1000 == 0:
             print(counter)
